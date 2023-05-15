@@ -5,11 +5,12 @@
  */
 module.exports = {
     development: {
-        client: 'pg',
+        client: 'mysql',
         connection: {
-            database: 'vehicle',
-            user: 'postgres',
-            password: 'postgres',
+            host: process.env.DB_HOST,
+            database: 'absensi',
+            user: 'root',
+            password: process.env.DB_PASSWORD,
         },
         migrations: {
             directory: './db/migrations',
