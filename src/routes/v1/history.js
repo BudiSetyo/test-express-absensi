@@ -16,4 +16,11 @@ router.post(
     controller.submitAttendance
 )
 
+router.post(
+    '/attendance-close',
+    middleware.authentication,
+    middleware.otorization,
+    controller.closeAttendance
+)
+
 module.exports = router

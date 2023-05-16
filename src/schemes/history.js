@@ -59,9 +59,12 @@ const getAllHistoryUser = async (id) => {
     }
 }
 
-const getHistoryByDate = async (date) => {
+const getHistoryByDate = async (date, id) => {
     try {
-        const _data = await HistoryModel.query().where('date', date)
+        const _data = await HistoryModel.query().where({
+            date: date,
+            userId: id,
+        })
 
         return {
             error: false,
