@@ -59,8 +59,26 @@ const getAllHistoryUser = async (id) => {
     }
 }
 
+const getHistoryByDate = async (date) => {
+    try {
+        const _data = await HistoryModel.query().where('date', date)
+
+        return {
+            error: false,
+            data: _data,
+        }
+    } catch (err) {
+        return {
+            error: true,
+            data: err,
+        }
+    }
+}
+
 module.exports = {
     insertHistory,
     updateHistoryById,
     getAllHistoryUser,
+    getAllHistoryUser,
+    getHistoryByDate,
 }

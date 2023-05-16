@@ -64,6 +64,24 @@ const submitAttendance = async (req, res) => {
     const timeFormat = 'YYYY-MM-DD HH:mm:ss'
     const timeNow = Date.now()
 
+    const checkAttendance = await historySchema.getHistoryByDate(
+        moment(timeNow).format('YYYY-MM-DD')
+    )
+
+    if (checkAttendance.err) {
+        return response(res, 400, {
+            error: true,
+            message: 'Check attendance history user failed',
+        })
+    }
+
+    if (checkAttendance.data.length !== 0) {
+        return response(res, 400, {
+            error: true,
+            message: 'You have submit attendance today',
+        })
+    }
+
     const data = {
         userId,
         date: moment(timeNow).format('YYYY-MM-DD'),
