@@ -21,7 +21,20 @@ class HistoryModel extends Model {
         }
     }
 
-    static get relationMappings() {}
+    static get relationMappings() {
+        const UsersModel = require('./users')
+
+        return {
+            userHistory: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: UsersModel,
+                join: {
+                    from: 'history.userId',
+                    to: 'users.id',
+                },
+            },
+        }
+    }
 }
 
 module.exports = HistoryModel

@@ -10,9 +10,22 @@ router.post(
     middleware.otorization,
     controller.addUser
 )
-router.get('/', controller.getAlluser)
-router.get('/detail', controller.getUserByNik)
-router.patch('/', controller.deleteUserById)
-router.delete('/', controller.deleteUserById)
+
+router.get(
+    '/',
+    middleware.authentication,
+    middleware.otorization,
+    controller.getAlluser
+)
+router.get('/detail', middleware.authentication, controller.getUserByNik)
+
+router.patch('/', middleware.authentication, controller.deleteUserById)
+
+router.delete(
+    '/',
+    middleware.authentication,
+    middleware.otorization,
+    controller.deleteUserById
+)
 
 module.exports = router
