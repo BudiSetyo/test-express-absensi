@@ -1,5 +1,6 @@
 const historySchema = require('../schemes/history')
 const { response } = require('../utils/response')
+const moment = require('moment')
 
 const addHistory = async (req, res) => {
     const data = req.body
@@ -57,8 +58,50 @@ const getAllHistoryUser = async (req, res) => {
     })
 }
 
+const submitAttendance = async (req, res) => {
+    const { userId } = req.body
+
+    const timeFormat = 'YYYY-MM-DD HH:mm:ss'
+    const timeNow = Date.now()
+
+    const data = {
+        userId,
+        date: moment(timeNow).format('YYYY-MM-DD'),
+        time: moment(moment(timeNow).format(timeFormat)).isAfter(
+            moment(timeNow).format('YYYY-MM-DD') + ' 18:00:00'
+        )
+            ? '-'
+            : moment(timeNow).format('HH:mm:ss'),
+        description: moment(moment(timeNow).format(timeFormat)).isSameOrBefore(
+            moment(timeNow).format('YYYY-MM-DD') + ' 09:00:00'
+        )
+            ? 'hadir'
+            : moment(moment(timeNow).format(timeFormat)).isAfter(
+                  moment(timeNow).format('YYYY-MM-DD') + ' 18:00:00'
+              )
+            ? 'tidak hadir'
+            : 'terlambat',
+    }
+
+    const _data = await historySchema.insertHistory(data)
+
+    if (_data.error) {
+        return response(res, 400, {
+            error: true,
+            message: 'Submit attendance history user failed',
+        })
+    }
+
+    return response(res, 200, {
+        error: false,
+        message: 'Submit attendance history user success',
+        data: _data.data,
+    })
+}
+
 module.exports = {
     addHistory,
     updateHistoryById,
     getAllHistoryUser,
+    submitAttendance,
 }

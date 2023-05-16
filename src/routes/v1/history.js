@@ -10,4 +10,10 @@ router.patch('/', middleware.authentication, controller.updateHistoryById)
 
 router.get('/', middleware.authentication, controller.getAllHistoryUser)
 
+router.post(
+    '/attendance',
+    middleware.authentication,
+    controller.submitAttendance
+)
+
 module.exports = router
