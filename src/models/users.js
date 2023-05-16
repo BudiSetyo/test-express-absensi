@@ -1,6 +1,10 @@
 const { Model } = require('objection')
 
 class UsersModel extends Model {
+    constructor() {
+        super()
+    }
+
     static get tableName() {
         return 'users'
     }
