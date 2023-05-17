@@ -125,7 +125,7 @@ const closeAttendance = async (req, res) => {
     const timeNow = Date.now()
 
     const checkTime = moment(moment(timeNow).format(timeFormat)).isBefore(
-        moment(timeNow).format('YYYY-MM-DD') + ' 01:00:00'
+        moment(timeNow).format('YYYY-MM-DD') + ' 18:00:00'
     )
 
     if (checkTime) {
