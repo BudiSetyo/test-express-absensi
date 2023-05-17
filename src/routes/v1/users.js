@@ -21,6 +21,12 @@ router.get('/detail', middleware.authentication, controller.getUserByNik)
 
 router.patch('/', middleware.authentication, controller.deleteUserById)
 
+router.patch(
+    '/password',
+    middleware.authentication,
+    controller.updatePasswordUser
+)
+
 router.delete(
     '/',
     middleware.authentication,

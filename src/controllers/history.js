@@ -51,7 +51,7 @@ const getAllHistoryUser = async (req, res) => {
         })
     }
 
-    return response(res, 400, {
+    return response(res, 200, {
         error: false,
         message: 'Get all history user success',
         data: _data.data,

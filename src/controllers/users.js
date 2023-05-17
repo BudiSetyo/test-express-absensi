@@ -41,6 +41,34 @@ const addUser = async (req, res) => {
     })
 }
 
+const updatePasswordUser = async (req, res) => {
+    const { id } = req.query
+    const { password } = req.body
+
+    bcrypt.hash(password, 10, async (err, hash) => {
+        if (err) {
+            return response(res, 400, {
+                error: true,
+                message: 'Hash password error',
+            })
+        }
+
+        const _data = await usersSchema.updateUserById({ password: hash }, id)
+
+        if (_data.error) {
+            return response(res, 400, {
+                error: true,
+                message: 'Change password failed',
+            })
+        }
+
+        return response(res, 200, {
+            error: false,
+            message: 'Change password success',
+        })
+    })
+}
+
 const getAlluser = async (req, res) => {
     const _data = await usersSchema.getAlluser()
 
@@ -120,4 +148,5 @@ module.exports = {
     getUserByNik,
     updateUserById,
     deleteUserById,
+    updatePasswordUser,
 }

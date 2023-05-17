@@ -8,7 +8,7 @@ const login = async (req, res) => {
 
     const user = await usersSchema.getUserByNik(data.nik)
 
-    const hashPassword = user.data[0].password
+    const hashPassword = user.data[0]?.password
     const jwtData = user.data[0]
 
     if (user.data.length === 0) {
