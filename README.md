@@ -43,3 +43,9 @@ $ knex migrate:latest
 ```bash
 $ yarn dev
 ```
+
+9. If the nodemon not work please install nodemon as global and re run the app
+
+```bash
+$ yarn global add nodemon
+```
