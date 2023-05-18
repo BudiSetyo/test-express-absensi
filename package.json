@@ -9,13 +9,14 @@
         "format:write": "prettier --write .",
         "lint:check": "eslint .",
         "lint:fix": "eslint --fix .",
-        "dev": "nodemon"
+        "dev": "yarn nodemon index.js"
     },
     "devDependencies": {
         "dotenv": "^16.0.3",
         "eslint": "^8.24.0",
         "eslint-config-prettier": "^8.5.0",
         "knex": "^2.3.0",
+        "nodemon": "^2.0.22",
         "prettier": "^2.7.1"
     },
     "dependencies": {
